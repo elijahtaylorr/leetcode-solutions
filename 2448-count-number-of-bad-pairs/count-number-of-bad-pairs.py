@@ -1,15 +1,14 @@
 class Solution:
-    def countBadPairs(self, nums):
-
-        n = len(nums)
-        res = []
-        for i in range(n):
-            res.append(nums[i] - i)
-
-        a = Counter(res)
-        ans = n * (n - 1) // 2
-        for x in a:
-            if a[x] > 1:
-                ans -= a[x] * (a[x] - 1) // 2
+    def countBadPairs(self, nums: List[int]) -> int:
+        nums_len = len(nums)
+        count_dict = dict()
+        for i in range(nums_len):
+            nums[i] -= i
+            if nums[i] not in count_dict:
+                count_dict[nums[i]] = 0
+            count_dict[nums[i]] += 1
         
-        return ans
+        count = 0
+        for key in count_dict:
+            count += math.comb(count_dict[key], 2)
+        return math.comb(nums_len, 2) - count
