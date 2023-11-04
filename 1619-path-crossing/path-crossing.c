@@ -4,6 +4,7 @@ bool checkVisited(int** visited, int visitedSize, int x, int y) {
     for(size_t i = 0; i < visitedSize; i++){
         if(visited[i][0] == x && visited[i][1] == y){
             isVisited = true;
+            break;
         }
     }
     return isVisited;
@@ -19,14 +20,13 @@ bool isPathCrossing(char* path) {
     visited[0][1] = 0;
     char curChr = path[0];
     for(size_t i = 0; i < strnlen(path,10000);i++){
-        curChr = path[i];
-        if(curChr == 'N'){
+        if(path[i] == 'N'){
             curY++;
-        }else if(curChr == 'S'){
+        }else if(path[i] == 'S'){
             curY--;
-        }else if(curChr == 'E'){
+        }else if(path[i] == 'E'){
             curX++;
-        }else if(curChr == 'W') {
+        }else if(path[i] == 'W') {
             curX--;
         }
         if (checkVisited(visited,visitedSize-1,curX,curY)){
